@@ -1,3 +1,6 @@
 # projeto07
 
-A new Flutter project.
+Dados para acesso:
+e-mail: caju@emailadmin.com
+senha: admin123
+
