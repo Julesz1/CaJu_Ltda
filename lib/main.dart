@@ -2,6 +2,7 @@
 
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto07/views/cardapio.dart';
 import 'package:projeto07/views/login.dart';
  
 //definindo a paleta
@@ -27,6 +28,9 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Login(),
+      routes: {
+        'cardapio': (context) => Cardapio(),
+      },
     );
   }
 }
