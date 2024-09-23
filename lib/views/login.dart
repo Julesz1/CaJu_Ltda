@@ -14,39 +14,40 @@ class Login extends StatelessWidget {
           left: 40,
           right: 40,
         ),
-        color: const Color.fromARGB(255, 166, 96, 179),
+        color: Color(0xFFfff6ec), 
         child: ListView(
           children: <Widget>[
             SizedBox(
-              width: 200,
-              height: 200,
-              child: Image.asset('assets/images/shinji.png'),
+              width: 280,
+              height: 280,
+              child: Image.asset('assets/images/logo_borda.png'),
             ),
  
-            SizedBox(height: 20),
+            SizedBox(height: 10),
  
             TextFormField(
               autofocus: true,
               keyboardType: TextInputType.emailAddress,
               style: TextStyle(
                     fontSize: 18,
+                    color: Colors.black,
                      ),
                   decoration: InputDecoration(
                     labelText: 'Login: ',
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: TextStyle(color: Colors.black),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: Colors.white,
+                        color: Color(0xFF8A2F38),
                         width: 2.0,
                       )
                     )
@@ -61,23 +62,24 @@ class Login extends StatelessWidget {
                   keyboardType: TextInputType.text,
                   style: TextStyle(
                     fontSize: 18,
+                    color: Colors.black,
                   ),
                   decoration: InputDecoration(
                     labelText: 'Senha: ',
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: TextStyle(color: Colors.black),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide(
-                        color: Colors.white,
+                        color: Color(0xFF8A2F38),
                         width: 2.0,
                       )
                     )
@@ -90,7 +92,7 @@ class Login extends StatelessWidget {
               child: TextButton(
               onPressed: () => {},
               style: TextButton.styleFrom(
-              foregroundColor: Colors.white,
+              foregroundColor: Colors.black,
               ),
               child: Text(
                 "Recuperar Senha",
@@ -111,8 +113,8 @@ class Login extends StatelessWidget {
                   end: Alignment.bottomRight,
                   stops: [0.3, 1],
                   colors: [
-                    const Color.fromARGB(255, 51, 206, 56),
-                    const Color.fromARGB(255, 54, 172, 58),
+                    Color(0xFFC48C64), //tem que colocar 0xFF pra definir a opacidade antes do hex
+                    Color(0xFF8A2F38),
                   ],
                 ),
                 borderRadius: BorderRadius.all(
@@ -126,7 +128,7 @@ class Login extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Entrar (na p#rra do robô!)",
+                        "Entrar",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -151,8 +153,8 @@ class Login extends StatelessWidget {
                   end: Alignment.bottomRight,
                   stops: [0.3, 1],
                   colors: [
-                    const Color.fromARGB(255, 51, 206, 56),
-                    const Color.fromARGB(255, 54, 172, 58),
+                    Color(0xFFC48C64),
+                    Color(0xFF8A2F38),
                   ],
                 ),
                 borderRadius: BorderRadius.all(
