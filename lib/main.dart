@@ -1,4 +1,4 @@
- // ignore_for_file: prefer_const_constructors
+ // ignore_for_file: prefer_const_constructors, unused_import
 
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: Cardapio(),
       routes: {
         'cardapio': (context) => Cardapio(),
       },
