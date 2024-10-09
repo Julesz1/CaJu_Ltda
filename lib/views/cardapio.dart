@@ -49,19 +49,112 @@ class _CardapioState extends State<Cardapio> {
         ),
       ),
       body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Column(
-            children: [
-              Text('Cardápio'),
-            ],
+          Expanded(
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [
+                      SizedBox(
+                        height: 80,
+                        width: 150,
+                        child:  Card(
+                          child: ListTile(
+                            contentPadding: EdgeInsets.symmetric(vertical:3, horizontal: 8),
+                            leading: Image.asset(
+                              'assets/images/hot_drinks.png',
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
+                              ),  
+                              title: Text('Bebidas Quentes'),
+                              onTap: () {
+                                Navigator.pushNamed(context, 'bebidasQuentes');
+                              },
+                          ),
+                        ), 
+                      ),
+                      SizedBox(
+                        height: 80,
+                        width: 150,
+                        child: Card(
+                          child: ListTile(
+                            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                            leading: Image.asset(
+                              'assets/images/cold_drinks.png',
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
+                            ),
+                            title: Text('Bebidas Frias'),
+                            onTap: () {
+                              Navigator.pushNamed(context, 'bebidasFrias');
+                            },
+                          ),
+                        ),
+                      ),       
+                    ],
+                  )
+                )
+              ],
+            )
           ),
-          Column(
-            children: [
-              Text('cardápio'),
-            ],
-          ),
+          SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView(
+                    children: [
+                      SizedBox(
+                        height: 80,
+                        width: 150,
+                        child: Card(
+                          child: ListTile(
+                            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                            leading: Image.asset(
+                              'assets/images/pastry.jpeg',
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
+                            ),
+                            title: Text('Salgados'),
+                            onTap: () {
+                              Navigator.pushNamed(context, 'salgados');
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 80,
+                        width: 150,
+                        child: Card(
+                          child: ListTile(
+                            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                            leading: Image.asset(
+                              'assets/images/doces.jpg',
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
+                            ),
+                            title: Text('Doces'),
+                            onTap: () {
+                              Navigator.pushNamed(context, 'doces');
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                )
+              ],
+            )
+          )
         ],
       ),
+      
       backgroundColor: fundoTela,
     );
   }

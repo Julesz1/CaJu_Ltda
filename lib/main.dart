@@ -2,8 +2,12 @@
 
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto07/views/bebidasQuentes.dart';
+import 'package:projeto07/views/bebidasfrias.dart';
 import 'package:projeto07/views/cardapio.dart';
+import 'package:projeto07/views/doces.dart';
 import 'package:projeto07/views/login.dart';
+import 'package:projeto07/views/salgados.dart';
  
 //definindo a paleta
 const Color vermelhoQueimado = Color(0xFF8A2F38);
@@ -30,6 +34,10 @@ class MainApp extends StatelessWidget {
       home: Cardapio(),
       routes: {
         'cardapio': (context) => Cardapio(),
+        'bebidasQuentes': (context) => Bebidasquentes(),
+        'bebidasFrias': (context) => Bebidasfrias(),
+        'salgados': (context) => Salgados(),
+        'doces': (context) => Doces(),
       },
     );
   }
