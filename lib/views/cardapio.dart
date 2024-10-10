@@ -18,6 +18,7 @@ class _CardapioState extends State<Cardapio> {
       appBar: AppBar(
         backgroundColor: bege,
         toolbarHeight: 80,
+        automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -29,58 +30,73 @@ class _CardapioState extends State<Cardapio> {
             Text(
               'Café CaJu',
               style: TextStyle(
-                fontFamily: 'Arial', //descobrir qual fonte mais combina com o nome e importar depois no yaml
+                fontFamily:
+                    'Arial', //descobrir qual fonte mais combina com o nome e importar depois no yaml
                 fontSize: 20,
               ),
-              ),
+            ),
             IconButton(
               icon: Icon(Icons.logout),
               color: Colors.black,
               iconSize: 28,
               onPressed: () => {
-                Navigator.push(context,
-                 MaterialPageRoute(builder:
-                 (context) => Login()
-                 ),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login()),
                 )
               },
             )
           ],
         ),
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(height: 40),
+          Text(
+            'Cardápio',
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 20),
           Expanded(
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                  child: Column(
+                children: [
+                  Expanded(
+                      child: ListView(
                     children: [
+                      SizedBox(height: 10),
                       SizedBox(
                         height: 80,
                         width: 150,
-                        child:  Card(
+                        child: Card(
                           color: Color.fromARGB(185, 94, 58, 6),
                           child: ListTile(
-                            contentPadding: EdgeInsets.symmetric(vertical:3, horizontal: 8),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 3, horizontal: 8),
                             leading: Image.asset(
                               'assets/images/hot_drinks.png',
                               width: 50,
                               height: 50,
                               fit: BoxFit.cover,
-                              ),  
-                              title: Text(
-                                'Bebidas Quentes',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                                ),
-                              onTap: () {
-                                Navigator.pushNamed(context, 'bebidasQuentes');
-                              },
+                            ),
+                            title: Text(
+                              'Bebidas Quentes',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.pushNamed(context, 'bebidasQuentes');
+                            },
                           ),
-                        ), 
+                        ),
                       ),
                       SizedBox(
                         height: 80,
@@ -88,7 +104,8 @@ class _CardapioState extends State<Cardapio> {
                         child: Card(
                           color: Color.fromARGB(185, 94, 58, 6),
                           child: ListTile(
-                            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 8),
                             leading: Image.asset(
                               'assets/images/cold_drinks.png',
                               width: 50,
@@ -100,33 +117,33 @@ class _CardapioState extends State<Cardapio> {
                               style: TextStyle(
                                 color: Colors.white,
                               ),
-                              ),
+                            ),
                             onTap: () {
                               Navigator.pushNamed(context, 'bebidasFrias');
                             },
                           ),
                         ),
-                      ),       
+                      ),
                     ],
-                  )
-                )
-              ],
-            )
-          ),
-          SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView(
+                  ))
+                ],
+              )),
+              SizedBox(width: 10),
+              Expanded(
+                  child: Column(
+                children: [
+                  Expanded(
+                      child: ListView(
                     children: [
+                      SizedBox(height: 10),
                       SizedBox(
                         height: 80,
                         width: 150,
                         child: Card(
                           color: Color.fromARGB(185, 94, 58, 6),
                           child: ListTile(
-                            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 8),
                             leading: Image.asset(
                               'assets/images/pastry.jpeg',
                               width: 50,
@@ -138,7 +155,7 @@ class _CardapioState extends State<Cardapio> {
                               style: TextStyle(
                                 color: Colors.white,
                               ),
-                              ),
+                            ),
                             onTap: () {
                               Navigator.pushNamed(context, 'salgados');
                             },
@@ -151,7 +168,8 @@ class _CardapioState extends State<Cardapio> {
                         child: Card(
                           color: Color.fromARGB(185, 94, 58, 6),
                           child: ListTile(
-                            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 8),
                             leading: Image.asset(
                               'assets/images/doces.jpg',
                               width: 50,
@@ -160,10 +178,8 @@ class _CardapioState extends State<Cardapio> {
                             ),
                             title: Text(
                               'Doces',
-                              style: TextStyle(
-                                color: Colors.white
-                              ),
-                              ),
+                              style: TextStyle(color: Colors.white),
+                            ),
                             onTap: () {
                               Navigator.pushNamed(context, 'doces');
                             },
@@ -171,14 +187,13 @@ class _CardapioState extends State<Cardapio> {
                         ),
                       ),
                     ],
-                  )
-                )
-              ],
-            )
-          )
+                  ))
+                ],
+              ))
+            ],
+          ))
         ],
       ),
-      
       backgroundColor: fundoTela,
     );
   }

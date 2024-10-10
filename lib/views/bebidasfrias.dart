@@ -18,6 +18,7 @@ class _BebidasfriasState extends State<Bebidasfrias> {
       appBar: AppBar(
         backgroundColor: bege,
         toolbarHeight: 80,
+        automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

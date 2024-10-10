@@ -2,12 +2,14 @@
 
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto07/models/cafeteria.dart';
 import 'package:projeto07/views/bebidasQuentes.dart';
 import 'package:projeto07/views/bebidasfrias.dart';
 import 'package:projeto07/views/cardapio.dart';
 import 'package:projeto07/views/doces.dart';
 import 'package:projeto07/views/login.dart';
 import 'package:projeto07/views/salgados.dart';
+import 'package:provider/provider.dart';
  
 //definindo a paleta
 const Color vermelhoQueimado = Color(0xFF8A2F38);
@@ -17,9 +19,12 @@ const Color laranja = Color(0xFFB44134);
 const Color fundoTela = Color(0xFFFFF6EC);
 void main() {
   runApp(
-    DevicePreview(
-      enabled: true,
-      builder: (context) => MainApp(),
+    ChangeNotifierProvider(
+      create: (context) => Cafeteria(),
+        child: DevicePreview(
+          enabled: true,
+          builder: (context) => MainApp(),
+        ),
     ),
   );
 }
@@ -31,7 +36,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Cardapio(),
+      home: Bebidasquentes(),
       routes: {
         'cardapio': (context) => Cardapio(),
         'bebidasQuentes': (context) => Bebidasquentes(),

@@ -18,6 +18,7 @@ class _SalgadosState extends State<Salgados> {
       appBar: AppBar(
         backgroundColor: bege,
         toolbarHeight: 80,
+        automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

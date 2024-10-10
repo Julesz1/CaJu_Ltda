@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   device_preview: ^1.2.0
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
@@ -21,3 +22,7 @@ flutter:
   
   assets:
   - assets/images/
+  - assets/images/bebidasfrias
+  - assets/images/bebidasquentes
+  - assets/images/doces
+  - assets/images/salgados
