@@ -22,7 +22,4 @@ flutter:
   
   assets:
   - assets/images/
-  - assets/images/bebidasfrias
-  - assets/images/bebidasquentes
-  - assets/images/doces
-  - assets/images/salgados
+  

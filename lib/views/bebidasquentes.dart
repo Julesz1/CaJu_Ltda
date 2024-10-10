@@ -81,9 +81,6 @@ class _BebidasquentesState extends State<Bebidasquentes> {
                   child: ListTile(
                     leading: Image.asset(
                       bebida.imagem,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
                     ),
                     title: Text(bebida.nome),
                     trailing: Text(
