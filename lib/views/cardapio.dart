@@ -61,6 +61,7 @@ class _CardapioState extends State<Cardapio> {
                         height: 80,
                         width: 150,
                         child:  Card(
+                          color: Color.fromARGB(185, 94, 58, 6),
                           child: ListTile(
                             contentPadding: EdgeInsets.symmetric(vertical:3, horizontal: 8),
                             leading: Image.asset(
@@ -69,7 +70,12 @@ class _CardapioState extends State<Cardapio> {
                               height: 50,
                               fit: BoxFit.cover,
                               ),  
-                              title: Text('Bebidas Quentes'),
+                              title: Text(
+                                'Bebidas Quentes',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                                ),
                               onTap: () {
                                 Navigator.pushNamed(context, 'bebidasQuentes');
                               },
@@ -80,6 +86,7 @@ class _CardapioState extends State<Cardapio> {
                         height: 80,
                         width: 150,
                         child: Card(
+                          color: Color.fromARGB(185, 94, 58, 6),
                           child: ListTile(
                             contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
                             leading: Image.asset(
@@ -88,7 +95,12 @@ class _CardapioState extends State<Cardapio> {
                               height: 50,
                               fit: BoxFit.cover,
                             ),
-                            title: Text('Bebidas Frias'),
+                            title: Text(
+                              'Bebidas Frias',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                              ),
                             onTap: () {
                               Navigator.pushNamed(context, 'bebidasFrias');
                             },
@@ -112,6 +124,7 @@ class _CardapioState extends State<Cardapio> {
                         height: 80,
                         width: 150,
                         child: Card(
+                          color: Color.fromARGB(185, 94, 58, 6),
                           child: ListTile(
                             contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
                             leading: Image.asset(
@@ -120,7 +133,12 @@ class _CardapioState extends State<Cardapio> {
                               height: 50,
                               fit: BoxFit.cover,
                             ),
-                            title: Text('Salgados'),
+                            title: Text(
+                              'Salgados',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                              ),
                             onTap: () {
                               Navigator.pushNamed(context, 'salgados');
                             },
@@ -131,6 +149,7 @@ class _CardapioState extends State<Cardapio> {
                         height: 80,
                         width: 150,
                         child: Card(
+                          color: Color.fromARGB(185, 94, 58, 6),
                           child: ListTile(
                             contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
                             leading: Image.asset(
@@ -139,7 +158,12 @@ class _CardapioState extends State<Cardapio> {
                               height: 50,
                               fit: BoxFit.cover,
                             ),
-                            title: Text('Doces'),
+                            title: Text(
+                              'Doces',
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
+                              ),
                             onTap: () {
                               Navigator.pushNamed(context, 'doces');
                             },
