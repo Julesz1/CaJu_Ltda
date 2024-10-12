@@ -6,6 +6,7 @@ import 'package:projeto07/models/cafeteria.dart';
 import 'package:projeto07/views/bebidasQuentes.dart';
 import 'package:projeto07/views/bebidasfrias.dart';
 import 'package:projeto07/views/cardapio.dart';
+import 'package:projeto07/views/detalhes.dart';
 import 'package:projeto07/views/doces.dart';
 import 'package:projeto07/views/login.dart';
 import 'package:projeto07/views/salgados.dart';
@@ -38,11 +39,13 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Bebidasquentes(),
       routes: {
+        'login': (context) => Login(),
         'cardapio': (context) => Cardapio(),
         'bebidasQuentes': (context) => Bebidasquentes(),
         'bebidasFrias': (context) => Bebidasfrias(),
         'salgados': (context) => Salgados(),
         'doces': (context) => Doces(),
+        'detalhes': (context) => Detalhes(),
       },
     );
   }
