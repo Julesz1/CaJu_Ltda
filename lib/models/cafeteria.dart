@@ -8,7 +8,7 @@ class Cafeteria with ChangeNotifier {
     Pratos(
       nome: 'Affogato',
       descricao: 'Uma deliciosa combinação de café espresso quente derramado sobre uma bola de sorvete artesanal de baunilha, trazendo um equilíbrio entre o sabor forte do café e a cremosidade doce do sorvete.',
-      imagem: 'assets/images/bebidasquentes/affogato.jpg',
+      imagem: 'assets/images/affogato.jpg',
       categoria: PratosCategoria.bebidasQuentes,
       preco: 15.00
     ),
