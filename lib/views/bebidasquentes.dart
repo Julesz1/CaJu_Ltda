@@ -25,7 +25,6 @@ class _BebidasquentesState extends State<Bebidasquentes> {
   final cafeteria = Cafeteria();
 
   @override
-
   Widget build(BuildContext context) {
     final produto = cafeteria.items
         .where((prato) => prato.categoria == PratosCategoria.bebidasQuentes)
@@ -43,9 +42,7 @@ class _BebidasquentesState extends State<Bebidasquentes> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          Cardapio()),
+                  MaterialPageRoute(builder: (context) => Cardapio()),
                 );
               },
               child: Image.asset(
@@ -94,13 +91,18 @@ class _BebidasquentesState extends State<Bebidasquentes> {
             child: ListView.builder(
               itemCount: produto.length,
               itemBuilder: (context, index) {
-                final bebida = bebidasQuentes[index];
+                final bebida = produto[index];
                 return Column(
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
-                         MaterialPageRoute(builder: (context) => Itemdetalhe(item: bebidasQuentes[index])));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                Itemdetalhe(item: produto[index]),
+                          ),
+                        );
                       },
                       child: Container(
                         color: Colors.white,
@@ -117,26 +119,27 @@ class _BebidasquentesState extends State<Bebidasquentes> {
                             ),
                             SizedBox(width: 20),
                             Expanded(
-                                child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  bebida.nome,
-                                  style: TextStyle(
-                                    fontSize: 20,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    bebida.nome,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  'R\$ ${bebida.preco.toStringAsFixed(2)}',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
+                                  SizedBox(height: 10),
+                                  Text(
+                                    'R\$ ${bebida.preco.toStringAsFixed(2)}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ))
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -149,9 +152,10 @@ class _BebidasquentesState extends State<Bebidasquentes> {
                   ],
                 );
               },
-            )),
-          ]
-        ),  
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
