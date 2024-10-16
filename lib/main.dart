@@ -7,6 +7,7 @@ import 'package:projeto07/models/pratos.dart';
 import 'package:projeto07/providers/carrinho_provider.dart';
 import 'package:projeto07/views/bebidasQuentes.dart';
 import 'package:projeto07/views/bebidasfrias.dart';
+import 'package:projeto07/views/cadastrar.dart';
 import 'package:projeto07/views/cardapio.dart';
 import 'package:projeto07/views/carrinhopg.dart';
 import 'package:projeto07/views/detalhes.dart';
@@ -47,7 +48,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Bebidasquentes(),
+      home: Login(),
       routes: {
         'login': (context) => Login(),
         'cardapio': (context) => Cardapio(),
@@ -57,6 +58,7 @@ class MainApp extends StatelessWidget {
         'doces': (context) => Doces(),
         'detalhes': (context) => Detalhes(),
         'carrinho': (context) => Carrinhopg(),
+        'cadastro': (context) => Cadastrar(),
       },
     );
   }

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:projeto07/views/cadastrar.dart';
 import 'package:projeto07/views/cardapio.dart';
 
 class Login extends StatefulWidget {
@@ -195,7 +196,12 @@ class LoginState extends State<Login> {
                 ),
                 child: SizedBox.expand(
                   child: TextButton(
-                    onPressed: () => {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Cadastrar()),
+                );
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
