@@ -1,10 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:projeto07/models/cafeteria.dart';
 import 'package:projeto07/models/pratos.dart';
 import 'package:projeto07/views/cardapio.dart';
-import 'package:projeto07/views/itemDetalhe.dart';
 import 'package:projeto07/views/login.dart';
 
 //definindo a paleta
@@ -73,7 +72,7 @@ class _BebidasquentesState extends State<Bebidasquentes> {
           ],
         ),
       ),
-      body: Column(
+      body:Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(height: 20),
@@ -93,62 +92,50 @@ class _BebidasquentesState extends State<Bebidasquentes> {
               itemBuilder: (context, index) {
                 final bebida = produto[index];
                 return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                Itemdetalhe(item: produto[index]),
-                          ),
+                          'detalhes',
+                          arguments: bebida,
                         );
                       },
                       child: Container(
-                        color: Colors.white,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                        height: 120,
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              bebida.imagem,
-                              width: 120,
-                              height: 120,
-                              fit: BoxFit.cover,
-                            ),
-                            SizedBox(width: 20),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    bebida.nome,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    'R\$ ${bebida.preco.toStringAsFixed(2)}',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                        width: 350, 
+                        height: 200,
+                        child: Image.asset(
+                          bebida.imagem,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
-                    Divider(
-                      color: vermelhoQueimado,
-                      endIndent: 25,
-                      indent: 25,
-                    )
+                    Card(
+                      elevation: 4,
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      child: ListTile(
+                        title: Text(
+                          bebida.nome,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        trailing: Text(
+                          'R\$ ${bebida.preco.toStringAsFixed(2)}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            'detalhes',
+                            arguments: bebida,
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 30),
                   ],
                 );
               },

@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:projeto07/main.dart';
 import 'package:projeto07/models/pratos.dart';
+import 'package:projeto07/providers/carrinho_provider.dart';
+import 'package:provider/provider.dart';
 
 class Itemdetalhe extends StatefulWidget {
   final Pratos item;
@@ -76,16 +78,15 @@ class _ItemdetalheState extends State<Itemdetalhe> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 30, top: 10),
-              child: ElevatedButton(
+              child: FloatingActionButton(
                 onPressed: () {
+                  Provider.of<CarrinhoProvider>(context, listen: false).adicionarItem(widget.item);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Produto adicionado ao carrinho!'),)
+                  );
                 },
-                child: Text(
-                  'Adicionar ao Carrinho',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
+                child: const Icon(Icons.add_shopping_cart),
+              )      
             ),
           ],
         ),

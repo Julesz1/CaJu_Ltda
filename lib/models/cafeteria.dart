@@ -207,6 +207,4 @@ class Cafeteria with ChangeNotifier {
   }
 
   List<Pratos> get items => _items;
-
-
 }

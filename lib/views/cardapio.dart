@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:projeto07/main.dart';
-import 'package:projeto07/views/login.dart';
+import 'package:projeto07/views/carrinhopg.dart';
 
 class Cardapio extends StatefulWidget {
   const Cardapio({super.key});
@@ -36,16 +36,18 @@ class _CardapioState extends State<Cardapio> {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.logout),
+              icon: Icon(Icons.shopping_cart),
               color: Colors.black,
               iconSize: 28,
-              onPressed: () => {
-                Navigator.push(
+              onPressed: () async => {
+               await Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Login()),
-                )
+                  MaterialPageRoute(builder: (context) => Carrinhopg()),
+                ),
+                setState(() {     
+                }),
               },
-            )
+            ),
           ],
         ),
       ),
