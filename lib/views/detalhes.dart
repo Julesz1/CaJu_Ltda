@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:projeto07/models/pratos.dart';
@@ -92,6 +94,8 @@ class _DetalhesState extends State<Detalhes> {
                   onPressed: () {
                     // Acessando a quantidade através da GlobalKey
                     int quantidade = _contadorKey.currentState?.getQuantidade() ?? 1;
+                    dados.quantidade = quantidade;
+                    dados.preco = dados.preco * quantidade;
                     _carrinhoService.adicionarItem(dados, quantidade);
                     
                     ScaffoldMessenger.of(context).showSnackBar(

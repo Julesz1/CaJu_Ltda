@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:projeto07/models/pratos.dart';
 import 'package:projeto07/services/carrinho.dart'; 
@@ -61,7 +63,7 @@ class _CarrinhopgState extends State<Carrinhopg> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(10.0),
             child: Text(
               'Total: R\$ ${carrinhoService.total.toStringAsFixed(2)}',
               style: const TextStyle(
@@ -70,6 +72,45 @@ class _CarrinhopgState extends State<Carrinhopg> {
               ),
             ),
           ),
+              Container(
+                height: 50,
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    stops: [0.3, 1],
+                    colors: [
+                      Color(0xFFC48C64),
+                      Color(0xFF8A2F38),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5),
+                  ),
+                ),
+                child: SizedBox.expand(
+                  child: TextButton(
+                    onPressed: () {
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Finalizar Pedido",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
         ],
       ),
       backgroundColor: const Color(0xFFFFF6EC), 

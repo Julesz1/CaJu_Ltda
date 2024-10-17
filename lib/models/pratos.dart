@@ -4,8 +4,8 @@ class Pratos {
   final String descricao;
   final String imagem;
   final PratosCategoria categoria;
-  final double preco;
-  final int quantidade;
+  double preco;
+  int quantidade;
 
   Pratos({
     required this.nome,

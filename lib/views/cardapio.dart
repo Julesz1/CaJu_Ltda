@@ -107,7 +107,7 @@ class _CardapioState extends State<Cardapio> {
                           color: Color.fromARGB(185, 94, 58, 6),
                           child: ListTile(
                             contentPadding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 8),
+                                vertical: 3, horizontal: 8),
                             leading: Image.asset(
                               'assets/images/cold_drinks.png',
                               width: 50,
