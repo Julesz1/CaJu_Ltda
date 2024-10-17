@@ -5,13 +5,15 @@ class Pratos {
   final String imagem;
   final PratosCategoria categoria;
   final double preco;
+  final int quantidade;
 
   Pratos({
     required this.nome,
     required this.descricao,
     required this.imagem,
     required this.categoria,
-    required this.preco
+    required this.preco,
+    required this.quantidade
   });
 }
 
