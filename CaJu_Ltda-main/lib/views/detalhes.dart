@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:projeto07/models/pratos.dart';
 import 'package:projeto07/services/carrinho.dart';
 import 'package:projeto07/models/contador.dart';
 
@@ -26,7 +25,8 @@ class _DetalhesState extends State<Detalhes> {
 
   @override
   Widget build(BuildContext context) {
-    Pratos dados = ModalRoute.of(context)!.settings.arguments as Pratos;
+    final Map<String, dynamic> prato = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+
 
     return Scaffold(
       backgroundColor: fundoTela,
@@ -43,14 +43,14 @@ class _DetalhesState extends State<Detalhes> {
                   Container(
                     width: double.infinity,
                     child: Image.asset(
-                      dados.imagem,
+                      prato['imagem'],
                       fit: BoxFit.cover,
                       height: 300,
                     ),
                   ),
                   ListTile(
                     title: Text(
-                      dados.nome,
+                      prato['nome'],
                       style: TextStyle(
                         fontSize: 24,
                         color: vermelhoQueimado,
@@ -65,7 +65,7 @@ class _DetalhesState extends State<Detalhes> {
                       style: TextStyle(fontSize: 12),
                     ),
                     subtitle: Text(
-                      dados.descricao,
+                      prato['descricao'],
                       style: TextStyle(fontSize: 18),
                     ),
                   ),
@@ -75,7 +75,7 @@ class _DetalhesState extends State<Detalhes> {
                       style: TextStyle(fontSize: 12),
                     ),
                     subtitle: Text(
-                      'R\$ ${dados.preco.toStringAsFixed(2)}',
+                      'R\$ ${prato['preco'].toStringAsFixed(2)}',
                       style: TextStyle(fontSize: 22),
                     ),
                   ),
@@ -94,12 +94,12 @@ class _DetalhesState extends State<Detalhes> {
                   onPressed: () {
                     // Acessando a quantidade através da GlobalKey
                     int quantidade = _contadorKey.currentState?.getQuantidade() ?? 1;
-                    dados.quantidade = quantidade;
-                    dados.preco = dados.preco * quantidade;
-                    _carrinhoService.adicionarItem(dados, quantidade);
+                    prato['quantidade'] = quantidade;
+                    prato['preco'] = prato['preco'] * quantidade;
+                    _carrinhoService.adicionarItem(prato, quantidade);
                     
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('${dados.nome} adicionado ao carrinho!')),
+                      SnackBar(content: Text('${prato['nome']} adicionado ao carrinho!')),
                     );
                   },
                   style: ElevatedButton.styleFrom(

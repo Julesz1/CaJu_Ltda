@@ -18,10 +18,10 @@ class _CardapioState extends State<Cardapio> {
    final FirestoreService _firestoreService = FirestoreService();
 
    final Map<String, Widget Function(BuildContext)> categoriasMap = {
-    'Bebidas Quentes': (context) => Bebidasquentes(),
-    'Bebidas Frias': (context) => Bebidasfrias(),
-    'Doces': (context) => Doces(),
-    'Salgados': (context) => Salgados(),
+    'Bebidas Quentes': (context) => Bebidasquentes(categoria: 'Bebidas Quentes'),
+    'Bebidas Frias': (context) => Bebidasfrias(categoria: 'Bebidas Frias'),
+    'Doces': (context) => Doces(categoria: 'Doces',),
+    'Salgados': (context) => Salgados(categoria: 'Salgados',),
    };
 
   @override

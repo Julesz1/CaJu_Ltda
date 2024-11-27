@@ -1,8 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto07/firebase_options.dart';
-import 'package:projeto07/views/bebidasQuentes.dart';
+import 'package:projeto07/views/bebidasquentes.dart';
 import 'package:projeto07/views/bebidasfrias.dart';
 import 'package:projeto07/views/cadastrar.dart';
 import 'package:projeto07/views/cardapio.dart';
@@ -54,10 +56,10 @@ class MyApp extends StatelessWidget {
       routes: {
         'login': (context) => Login(),
         'cardapio': (context) => Cardapio(),
-        'bebidasQuentes': (context) => Bebidasquentes(),
-        'bebidasFrias': (context) => Bebidasfrias(),
-        'salgados': (context) => Salgados(),
-        'doces': (context) => Doces(),
+        'bebidasQuentes': (context) => Bebidasquentes(categoria: 'Bebidas Quentes'),
+        'bebidasFrias': (context) => Bebidasfrias(categoria: 'Bebidas Frias',),
+        'salgados': (context) => Salgados(categoria: 'Salgados',),
+        'doces': (context) => Doces(categoria: 'Doces',),
         'detalhes': (context) => Detalhes(),
         'carrinho': (context) => Carrinhopg(),
         'cadastro': (context) => Cadastrar(),

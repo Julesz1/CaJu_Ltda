@@ -1,10 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:projeto07/models/cafeteria.dart';
-import 'package:projeto07/models/pratos.dart';
 import 'package:projeto07/views/cardapio.dart';
 import 'package:projeto07/views/login.dart';
+import 'package:projeto07/providers/categorias.dart';  
 
-//definindo a paleta
+// definindo a paleta
 const Color vermelhoQueimado = Color(0xFF8A2F38);
 const Color verde = Color(0xFF6E744D);
 const Color bege = Color(0xFFC48C64);
@@ -12,22 +13,18 @@ const Color laranja = Color(0xFFB44134);
 const Color fundoTela = Color(0xFFFFF6EC);
 
 class Salgados extends StatefulWidget {
-  const Salgados({super.key});
+  final String categoria;
+  const Salgados({super.key, required this.categoria});
 
   @override
   State<Salgados> createState() => _SalgadosState();
 }
 
 class _SalgadosState extends State<Salgados> {
-  final cafeteria = Cafeteria();
+  final FirestoreService _firestoreService = FirestoreService();  
 
   @override
-
-Widget build(BuildContext context) {
-    final produto = cafeteria.items
-        .where((prato) => prato.categoria == PratosCategoria.salgados)
-        .toList();
-
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: bege,
@@ -40,9 +37,7 @@ Widget build(BuildContext context) {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          Cardapio()),
+                  MaterialPageRoute(builder: (context) => Cardapio()),
                 );
               },
               child: Image.asset(
@@ -73,76 +68,89 @@ Widget build(BuildContext context) {
           ],
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 20),
-          Text(
-            'Salgados',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: Colors.brown,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 20),
-          Expanded(
-            child: ListView.builder(
-              itemCount: produto.length,
-              itemBuilder: (context, index) {
-                final bebida = produto[index];
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          'detalhes',
-                          arguments: bebida,
-                        );
-                      },
-                      child: Container(
-                        width: 350, 
-                        height: 200,
-                        child: Image.asset(
-                          bebida.imagem,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Card(
-                      elevation: 4,
-                      margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                      child: ListTile(
-                        title: Text(
-                          bebida.nome,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        trailing: Text(
-                          'R\$ ${bebida.preco.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+      body: FutureBuilder<List<Map<String, dynamic>>>(
+        future: _firestoreService.getItensCardapio(widget.categoria),  
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text('Erro ao carregar itens.'));
+          }
+          final itens = snapshot.data!;
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 20),
+              Text(
+                'Salgados',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.brown,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: itens.length,
+                  itemBuilder: (context, index) {
+                    final item = itens[index];
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              'detalhes',
+                              arguments: item,
+                            );
+                          },
+                          child: Container(
+                            width: 350,
+                            height: 200,
+                            child: Image.network(
+                              item['imagem'],
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            'detalhes',
-                            arguments: bebida,
-                          );
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                  ],
-                );
-              },
-            ),
-          ),
-        ],
+                        Card(
+                          elevation: 4,
+                          margin: EdgeInsets.symmetric(horizontal: 20),
+                          child: ListTile(
+                            title: Text(
+                              item['nome'],
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            trailing: Text(
+                              'R\$ ${item['preco']}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                'detalhes',
+                                arguments: item,
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 30),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

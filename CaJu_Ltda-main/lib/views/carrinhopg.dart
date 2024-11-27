@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:projeto07/models/pratos.dart';
 import 'package:projeto07/services/carrinho.dart'; 
 
 final carrinhoService = getIt<CarrinhoService>();
@@ -42,9 +41,9 @@ class _CarrinhopgState extends State<Carrinhopg> {
               itemBuilder: (context, index) {
                 final item = itensCarrinho[index];
                 return ListTile(
-                  title: Text(item.nome),
-                  subtitle: Text('Quantidade: ${carrinhoService.itens[index].quantidade}'), 
-                  trailing: Text('R\$ ${item.preco.toStringAsFixed(2)}'),
+                  title: Text(item['nome']),
+                  subtitle: Text('Quantidade: ${carrinhoService.itens[index]['quantidade']}'), 
+                  trailing: Text('R\$ ${item['preco'].toStringAsFixed(2)}'),
                   leading: IconButton(
                     icon: const Icon(Icons.remove_circle_outline),
                     onPressed: () {
@@ -54,7 +53,7 @@ class _CarrinhopgState extends State<Carrinhopg> {
                       });
 
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('${item.nome} removido do carrinho!')),
+                        SnackBar(content: Text('${item['nome']} removido do carrinho!')),
                       );
                     },
                   ),
