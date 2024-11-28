@@ -1,7 +1,7 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:projeto07/services/carrinho.dart';
 import 'package:projeto07/models/contador.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,13 +21,11 @@ class Detalhes extends StatefulWidget {
 }
 
 class _DetalhesState extends State<Detalhes> {
-  final CarrinhoService _carrinhoService = GetIt.instance<CarrinhoService>();
-  final GlobalKey<ContadorState> _contadorKey = GlobalKey<ContadorState>(); // GlobalKey para acessar o estado do Contador
+  final GlobalKey<ContadorState> _contadorKey = GlobalKey<ContadorState>();
 
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> prato = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-
 
     return Scaffold(
       backgroundColor: fundoTela,
@@ -83,33 +81,23 @@ class _DetalhesState extends State<Detalhes> {
                 ],
               ),
             ),
-            
-            // Contador com a GlobalKey para acessar o estado
             Contador(key: _contadorKey),
-
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
                 margin: EdgeInsets.all(20),
                 child: ElevatedButton(
-                  onPressed: () async {
+                  onPressed: () {
                     int quantidade = _contadorKey.currentState?.getQuantidade() ?? 1;
 
-                    final itemPedido = {
+                    final item = {
                       'nome': prato['nome'],
                       'preco': prato['preco'],
-                      'quantidade' : prato['quantidade'],
+                      'quantidade': quantidade,
                     };
 
-                    final pedidoDoc = FirebaseFirestore.instance.collection('pedidos').doc('pedido_ativo');
-
-                    await pedidoDoc.set({
-                      'uid': 'ID_DO_CLIENTE',
-                      'status': 'preparando',
-                      'data_hora': DateTime.now().toIso8601String(),
-                    }, SetOptions(merge: true));
-
-                    await pedidoDoc.collection('itens').add(itemPedido);
+                    Provider.of<CarrinhoService>(context, listen: false)
+                        .adicionarItem(item, quantidade);
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('${prato['nome']} adicionado ao pedido!')),

@@ -16,6 +16,7 @@ import 'package:projeto07/views/salgados.dart';
 import 'package:get_it/get_it.dart';
 import 'package:projeto07/services/carrinho.dart'; 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 // definindo a paleta
 const Color vermelhoQueimado = Color(0xFF8A2F38);
@@ -25,20 +26,24 @@ const Color laranja = Color(0xFFB44134);
 const Color fundoTela = Color(0xFFFFF6EC);
 
 
-void setupLocator() {
-  GetIt.instance.registerSingleton<CarrinhoService>(CarrinhoService());
-}
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  setupLocator();
   runApp(
     DevicePreview(
-      enabled: true,  
-      builder: (context) => MyApp(), 
-    ),
+      enabled: true,
+      builder: (context) => MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => CarrinhoService(),
+          ),
+        ],
+        child: MyApp(),
+      ),
+    ), 
   );
 }
 
