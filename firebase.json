@@ -1,1 +1,22 @@
-{"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"cafeteriacaju","configurations":{"web":"1:294000801359:web:514905e1c5c51c89ea9c3a"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "cafeteriacaju",
+          "configurations": {
+            "web": "1:294000801359:web:514905e1c5c51c89ea9c3a"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
