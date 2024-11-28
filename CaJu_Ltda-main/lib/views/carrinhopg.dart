@@ -1,9 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:projeto07/services/carrinho.dart'; 
-
-final carrinhoService = getIt<CarrinhoService>();
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:projeto07/services/carrinho.dart';
 
 class Carrinhopg extends StatefulWidget {
   const Carrinhopg({super.key});
@@ -13,13 +12,13 @@ class Carrinhopg extends StatefulWidget {
 }
 
 class _CarrinhopgState extends State<Carrinhopg> {
+  final carrinhoService = getIt<CarrinhoService>();
+
   @override
   Widget build(BuildContext context) {
-    final itensCarrinho = carrinhoService.itens;
-
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFFC48C64), 
+        backgroundColor: const Color(0xFFC48C64),
         toolbarHeight: 80,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -37,24 +36,20 @@ class _CarrinhopgState extends State<Carrinhopg> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: itensCarrinho.length,
+              itemCount: carrinhoService.itens.length,
               itemBuilder: (context, index) {
-                final item = itensCarrinho[index];
+                final item = carrinhoService.itens[index];
+
                 return ListTile(
                   title: Text(item['nome']),
-                  subtitle: Text('Quantidade: ${carrinhoService.itens[index]['quantidade']}'), 
+                  subtitle: Text('Quantidade: ${item['quantidade']}'),
                   trailing: Text('R\$ ${item['preco'].toStringAsFixed(2)}'),
                   leading: IconButton(
-                    icon: const Icon(Icons.remove_circle_outline),
+                    icon: Icon(Icons.remove_circle_outline),
                     onPressed: () {
                       setState(() {
-
                         carrinhoService.removerItem(item);
                       });
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('${item['nome']} removido do carrinho!')),
-                      );
                     },
                   ),
                 );
@@ -62,57 +57,37 @@ class _CarrinhopgState extends State<Carrinhopg> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10),
             child: Text(
               'Total: R\$ ${carrinhoService.total.toStringAsFixed(2)}',
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-              Container(
-                height: 50,
-                alignment: Alignment.centerLeft,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: [0.3, 1],
-                    colors: [
-                      Color(0xFFC48C64),
-                      Color(0xFF8A2F38),
-                    ],
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
-                ),
-                child: SizedBox.expand(
-                  child: TextButton(
-                    onPressed: () {
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Finalizar Pedido",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () async {
+              try {
+                await PedidoService().finalizarPedido(carrinhoService.itens);
+
+                setState(() {
+                  carrinhoService.itens.clear();
+                });
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Pedido realizado com sucesso!')),
+                );
+
+                Navigator.of(context).pop();
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Erro ao finalizar o pedido: $e')),
+                );
+              }
+            },
+            child: Text('Finalizar Pedido'),
+          ),
         ],
       ),
-      backgroundColor: const Color(0xFFFFF6EC), 
+      backgroundColor: const Color(0xFFFFF6EC),
     );
   }
 }

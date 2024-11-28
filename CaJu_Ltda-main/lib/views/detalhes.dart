@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:projeto07/services/carrinho.dart';
 import 'package:projeto07/models/contador.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Definindo a paleta de cores
 const Color vermelhoQueimado = Color(0xFF8A2F38);
@@ -91,15 +92,27 @@ class _DetalhesState extends State<Detalhes> {
               child: Container(
                 margin: EdgeInsets.all(20),
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Acessando a quantidade através da GlobalKey
+                  onPressed: () async {
                     int quantidade = _contadorKey.currentState?.getQuantidade() ?? 1;
-                    prato['quantidade'] = quantidade;
-                    prato['preco'] = prato['preco'] * quantidade;
-                    _carrinhoService.adicionarItem(prato, quantidade);
-                    
+
+                    final itemPedido = {
+                      'nome': prato['nome'],
+                      'preco': prato['preco'],
+                      'quantidade' : prato['quantidade'],
+                    };
+
+                    final pedidoDoc = FirebaseFirestore.instance.collection('pedidos').doc('pedido_ativo');
+
+                    await pedidoDoc.set({
+                      'uid': 'ID_DO_CLIENTE',
+                      'status': 'preparando',
+                      'data_hora': DateTime.now().toIso8601String(),
+                    }, SetOptions(merge: true));
+
+                    await pedidoDoc.collection('itens').add(itemPedido);
+
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('${prato['nome']} adicionado ao carrinho!')),
+                      SnackBar(content: Text('${prato['nome']} adicionado ao pedido!')),
                     );
                   },
                   style: ElevatedButton.styleFrom(
