@@ -42,7 +42,7 @@ Widget build(BuildContext context) {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          Cardapio()),
+                          const Cardapio()),
                 );
               },
               child: Image.asset(
@@ -51,7 +51,7 @@ Widget build(BuildContext context) {
                 height: 70,
               ),
             ),
-            Text(
+            const Text(
               'MENU',
               style: TextStyle(
                 fontFamily: 'Arial',
@@ -60,13 +60,13 @@ Widget build(BuildContext context) {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.logout),
+              icon: const Icon(Icons.logout),
               color: Colors.white,
               iconSize: 28,
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Login()),
+                  MaterialPageRoute(builder: (context) => const Login()),
                 );
               },
             ),
@@ -76,8 +76,8 @@ Widget build(BuildContext context) {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 20),
-          Text(
+          const SizedBox(height: 20),
+          const Text(
             'Salgados',
             style: TextStyle(
               fontSize: 30,
@@ -86,7 +86,7 @@ Widget build(BuildContext context) {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
               itemCount: produto.length,
@@ -103,7 +103,7 @@ Widget build(BuildContext context) {
                           arguments: bebida,
                         );
                       },
-                      child: Container(
+                      child: SizedBox(
                         width: 350, 
                         height: 200,
                         child: Image.asset(
@@ -114,15 +114,15 @@ Widget build(BuildContext context) {
                     ),
                     Card(
                       elevation: 4,
-                      margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                      margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                       child: ListTile(
                         title: Text(
                           bebida.nome,
-                          style: TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                         ),
                         trailing: Text(
                           'R\$ ${bebida.preco.toStringAsFixed(2)}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
@@ -136,7 +136,7 @@ Widget build(BuildContext context) {
                         },
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                   ],
                 );
               },

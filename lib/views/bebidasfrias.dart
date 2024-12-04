@@ -98,7 +98,7 @@ class _BebidasfriasState extends State<Bebidasfrias> {
                           arguments: bebida,
                         );
                       },
-                      child: Container(
+                      child: SizedBox(
                         width: 350, 
                         height: 200,
                         child: Image.asset(

@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_final_fields, avoid_print, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto07/main.dart';
+import 'package:projeto07/services/funcoes.dart';
 
 class Cadastrar extends StatefulWidget {
   const Cadastrar({super.key});
@@ -15,15 +18,30 @@ class _CadastrarState extends State<Cadastrar> {
   String _nome = '';
   String _email = '';
   String _senha = '';
-  String _confirmaSenha = '';
 
-  void _cadastrar(){
-    if (_formKey.currentState!.validate()){
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Cadastro realizado com sucesso!'))
-      );
+  void _cadastrar(String email, String senha, String nome) async {
+    if (_formKey.currentState!.validate()) {
+      FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: senha)
+          .then((res) async {
+        //Armazenar informações adicionais no Firestore
+        await FirebaseFirestore.instance
+            .collection('usuarios')
+            .add({"uid": res.user!.uid.toString(), "nome": nome});
+        mostrarSnackBar(context, 'Usuário criado com sucesso!', 2);
+        Navigator.pop(context);
+      }).catchError((e) {
+        switch (e.code) {
+          case 'email-already-in-use':
+            mostrarSnackBar(context, 'O e-mail $email já está em uso.', 2);
+            break;
+          default:
+            mostrarSnackBar(context, 'Erro: ${e.code.toString()}', 2);
+        }
+      });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,8 +71,8 @@ class _CadastrarState extends State<Cadastrar> {
             children: [
               TextFormField(
                 decoration: InputDecoration(labelText: 'Nome'),
-                validator: (value){
-                  if (value == null || value.isEmpty){
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
                     return 'Por favor, insira seu nome';
                   }
                   return null;
@@ -67,7 +85,7 @@ class _CadastrarState extends State<Cadastrar> {
               TextFormField(
                 decoration: InputDecoration(labelText: 'E-mail'),
                 validator: (value) {
-                  if (value == null || value.isEmpty){
+                  if (value == null || value.isEmpty) {
                     return 'Por favor, insira seu e-mail';
                   }
                   if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
@@ -75,7 +93,7 @@ class _CadastrarState extends State<Cadastrar> {
                   }
                   return null;
                 },
-                onChanged: (value){
+                onChanged: (value) {
                   _email = value;
                 },
               ),
@@ -83,13 +101,13 @@ class _CadastrarState extends State<Cadastrar> {
               TextFormField(
                 decoration: InputDecoration(labelText: 'Senha'),
                 obscureText: true,
-                validator: (value){
-                  if (value == null || value.isEmpty){
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
                     return 'Por favor, insira uma senha';
                   }
                   return null;
                 },
-                onChanged: (value){
+                onChanged: (value) {
                   _senha = value;
                 },
               ),
@@ -97,18 +115,15 @@ class _CadastrarState extends State<Cadastrar> {
               TextFormField(
                 decoration: InputDecoration(labelText: 'Confirmação de Senha'),
                 obscureText: true,
-                validator: (value){
-                  if (value != _senha){
+                validator: (value) {
+                  if (value != _senha) {
                     return 'As senhas não coincidem';
                   }
                   return null;
                 },
-                onChanged: (value){
-                  _confirmaSenha = value;
-                },
               ),
               SizedBox(height: 40),
-             Container(
+              Container(
                 height: 50,
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
@@ -127,8 +142,8 @@ class _CadastrarState extends State<Cadastrar> {
                 ),
                 child: SizedBox.expand(
                   child: TextButton(
-                    onPressed: () {
-                      _cadastrar();
+                    onPressed: () async {
+                      _cadastrar(_email, _senha, _nome);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +163,7 @@ class _CadastrarState extends State<Cadastrar> {
                 ),
               ),
               SizedBox(height: 20),
-             Container(
+              Container(
                 height: 50,
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
@@ -188,7 +203,7 @@ class _CadastrarState extends State<Cadastrar> {
                 ),
               ),
             ],
-          ), 
+          ),
         ),
       ),
     );

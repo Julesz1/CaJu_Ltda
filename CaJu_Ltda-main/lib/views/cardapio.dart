@@ -10,6 +10,8 @@ import 'package:projeto07/views/doces.dart';
 import 'package:projeto07/views/salgados.dart';
 
 class Cardapio extends StatefulWidget {
+  const Cardapio({super.key});
+
   @override
   State<Cardapio> createState() => _CardapioState();
 }

@@ -35,12 +35,12 @@ class ContadorState extends State<Contador> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
-          icon: Icon(Icons.remove),
+          icon: const Icon(Icons.remove),
           onPressed: decremento,
         ),
-        Text('$quantidade', style: TextStyle(fontSize: 20)),
+        Text('$quantidade', style: const TextStyle(fontSize: 20)),
         IconButton(
-          icon: Icon(Icons.add),
+          icon: const Icon(Icons.add),
           onPressed: incremento,
         ),
       ],

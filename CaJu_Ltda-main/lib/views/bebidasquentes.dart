@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:projeto07/views/cardapio.dart';
-import 'package:projeto07/views/detalhes.dart';
 import 'package:projeto07/views/login.dart';
 import 'package:projeto07/providers/categorias.dart';
 

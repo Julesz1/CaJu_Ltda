@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:projeto07/main.dart';
-import 'package:projeto07/views/login.dart';
 import '../controller/login_controller.dart';
 
 class Cadastrar extends StatefulWidget {

@@ -7,7 +7,7 @@ final GetIt getIt = GetIt.instance;
 
 class CarrinhoService extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  List<Map<String, dynamic>> _itensCarrinho = [];
+  final List<Map<String, dynamic>> _itensCarrinho = [];
 
   // Getter para itens do carrinho
   List<Map<String, dynamic>> get itens => List.unmodifiable(_itensCarrinho);

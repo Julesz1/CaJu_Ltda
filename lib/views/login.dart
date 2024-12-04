@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto07/services/funcoes.dart';
 import 'package:projeto07/views/cadastrar.dart';
 import 'package:projeto07/views/cardapio.dart';
 
@@ -18,32 +20,47 @@ class LoginState extends State<Login> {
 
   void _validateForm() {
     if (_formKey.currentState!.validate()) {
-      const String emailValido = 'caju@emailadmin.com';
-      const String senhaValida = 'admin123';
+      String email = _emailController.text.trim();
+      String senha = _senhaController.text.trim();
 
-      if (_emailController.text == emailValido && _senhaController.text == senhaValida) {
-        Navigator.push(context,
-         MaterialPageRoute(builder: 
-         (context) => Cardapio()
-         ),
+      FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: senha)
+          .then((res) {
+        // Caso esteja autenticado, redireciona para a tela Principal
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Cardapio()),
         );
-      } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('E-mail ou senha incorretos.'),
-          duration: Duration(seconds: 5),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Favor informar dados válidos!'),
-          duration: Duration(seconds: 5),
-          backgroundColor: Colors.red,
-          ),
-      );
+      }).catchError((e)
+              // Caso identifique erros, exibe uma mensagem de erro
+              {
+        switch (e.code) {
+          case 'invalid-email':
+            String mensagem;
+            (email.isEmpty || email == '')
+                ? mensagem = 'Informe um e-mail!'
+                : mensagem = 'E-mail inválido.';
+            mostrarSnackBar(context, mensagem, 1);
+            break;
+          case 'user-not-found':
+            mostrarSnackBar(
+                context,
+                'Não existe uma conta para o email $email. Clique em Registre-se para criar uma.',
+                1);
+            break;
+          case 'wrong-password':
+            mostrarSnackBar(context, 'E-mail ou senha incorretos!', 1);
+            break;
+          case 'missing-password':
+            mostrarSnackBar(context, 'Informe a senha!', 1);
+            break;
+          case 'invalid-credential':
+            mostrarSnackBar(context, 'E-mail ou senha incorretos!', 1);
+            break;
+          default:
+            mostrarSnackBar(context, 'Erro: ${e.code.toString()}', 1);
+        }
+      });
     }
   }
 
@@ -90,6 +107,7 @@ class LoginState extends State<Login> {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira seu e-mail.';
                   }
+                  return null;
                 },
               ),
               SizedBox(height: 20),
@@ -200,7 +218,7 @@ class LoginState extends State<Login> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => Cadastrar()),
-                );
+                      );
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

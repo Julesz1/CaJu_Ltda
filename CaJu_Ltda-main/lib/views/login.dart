@@ -127,6 +127,7 @@ class LoginState extends State<Login> {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, insira seu e-mail.';
                   }
+                  return null;
                 },
               ),
               SizedBox(height: 20),

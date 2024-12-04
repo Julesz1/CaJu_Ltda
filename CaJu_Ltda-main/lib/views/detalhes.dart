@@ -39,7 +39,7 @@ class _DetalhesState extends State<Detalhes> {
             Expanded(
               child: ListView(
                 children: [
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     child: Image.asset(
                       prato['imagem'],

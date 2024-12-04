@@ -41,7 +41,7 @@ class _DocesState extends State<Doces> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          Cardapio()),
+                          const Cardapio()),
                 );
               },
               child: Image.asset(
@@ -50,7 +50,7 @@ class _DocesState extends State<Doces> {
                 height: 70,
               ),
             ),
-            Text(
+            const Text(
               'MENU',
               style: TextStyle(
                 fontFamily: 'Arial',
@@ -59,13 +59,13 @@ class _DocesState extends State<Doces> {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.logout),
+              icon: const Icon(Icons.logout),
               color: Colors.white,
               iconSize: 28,
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Login()),
+                  MaterialPageRoute(builder: (context) => const Login()),
                 );
               },
             ),
@@ -75,8 +75,8 @@ class _DocesState extends State<Doces> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 20),
-          Text(
+          const SizedBox(height: 20),
+          const Text(
             'Doces',
             style: TextStyle(
               fontSize: 30,
@@ -85,7 +85,7 @@ class _DocesState extends State<Doces> {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
               itemCount: produtos.length,
@@ -102,7 +102,7 @@ class _DocesState extends State<Doces> {
                           arguments: bebida,
                         );
                       },
-                      child: Container(
+                      child: SizedBox(
                         width: 350, 
                         height: 200,
                         child: Image.asset(
@@ -113,15 +113,15 @@ class _DocesState extends State<Doces> {
                     ),
                     Card(
                       elevation: 4,
-                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
                       child: ListTile(
                         title: Text(
                           bebida.nome,
-                          style: TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 20),
                         ),
                         trailing: Text(
                           'R\$ ${bebida.preco.toStringAsFixed(2)}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
@@ -135,7 +135,7 @@ class _DocesState extends State<Doces> {
                         },
                       ),
                     ),
-                    SizedBox(height: 30),
+                    const SizedBox(height: 30),
                   ],
                 );
               },
