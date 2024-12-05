@@ -1,5 +1,4 @@
 class Pratos {
-
   final String nome;
   final String descricao;
   final String imagem;
@@ -7,19 +6,17 @@ class Pratos {
   double preco;
   int quantidade;
 
-  Pratos({
-    required this.nome,
-    required this.descricao,
-    required this.imagem,
-    required this.categoria,
-    required this.preco,
-    required this.quantidade
-  });
+  Pratos(
+      {required this.nome,
+      required this.descricao,
+      required this.imagem,
+      required this.categoria,
+      required this.preco,
+      required this.quantidade});
+
+  String getImagem() {
+    return this.imagem;
+  }
 }
 
-enum PratosCategoria {
-  bebidasQuentes,
-  bebidasFrias,
-  salgados,
-  doces
-}
+enum PratosCategoria { bebidasQuentes, bebidasFrias, salgados, doces }

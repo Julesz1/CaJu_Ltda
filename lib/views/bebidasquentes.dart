@@ -22,7 +22,7 @@ class Bebidasquentes extends StatefulWidget {
 
 class _BebidasquentesState extends State<Bebidasquentes> {
   final cafeteria = Cafeteria();
-
+  
   @override
   Widget build(BuildContext context) {
     final produto = cafeteria.items
@@ -106,7 +106,7 @@ class _BebidasquentesState extends State<Bebidasquentes> {
                         width: 350, 
                         height: 200,
                         child: Image.asset(
-                          bebida.imagem,
+                          bebida.getImagem(),
                           fit: BoxFit.cover,
                         ),
                       ),
